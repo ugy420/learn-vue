@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{ capMessage() }}</h1>
+            <p>Lucky Number: {{ luckyNum }}</p>
+            <p>Lucky Number is an {{ LuckyNumber%2==0?"even":"odd" }} number</p>
+            <p>Random number from 1-10: {{ RandomLuckyNumber() }}</p>
+            <p>{{ employee.name }} is {{ employee.age}} years old.  </p>
+        </div>
+    </body>
+    <script>
+        const { createApp, ref } = Vue;
+        
+        createApp({
+            setup(){
+                const message = 'Hello Vue 3!';
+                let luckyNum = ref(7);
+                const luckyNumbers = [3,7,9,11]
+                const employee = {
+                    name:'John',
+                    age: 30,
+                    salary: 40000
+                }
+
+                function RandomLuckyNumber(){
+                    luckyNum.value = Math.floor(Math.random()*10) + 1;  
+                    return Math.floor(Math.random()*10)+1;
+                }
+
+                function capMessage(){
+                    return message.toUpperCase()
+                }
+
+                return{
+                    message,
+                    luckyNum,
+                    luckyNumbers,
+                    employee,
+                    RandomLuckyNumber,
+                    capMessage
+                };
+            },
+        }).mount('#app');
+    </script>
+</html>
