@@ -5,43 +5,35 @@
     </head>
     <body>
         <div id="app">
-            <h1>{{ capMessage() }}</h1>
-            <p>Lucky Number: {{ luckyNum }}</p>
-            <p>Lucky Number is an {{ LuckyNumber%2==0?"even":"odd" }} number</p>
-            <p>Random number from 1-10: {{ RandomLuckyNumber() }}</p>
-            <p>{{ employee.name }} is {{ employee.age}} years old.  </p>
+            <input type="text" v-on:keyup.enter="pressEnter">
+            <button v-on:click="buttonClick('VJS is nice',$event)">Click Me!</button>
+            <p>
+                x: {{ x }} y: {{ y }}
+            </p>
         </div>
     </body>
     <script>
-        const { createApp, ref } = Vue;
-        
+        const { createApp, ref, reactive} = Vue;
         createApp({
             setup(){
-                const message = 'Hello Vue 3!';
-                let luckyNum = ref(7);
-                const luckyNumbers = [3,7,9,11]
-                const employee = {
-                    name:'John',
-                    age: 30,
-                    salary: 40000
+                let x = ref(0);
+                let y = ref(0);
+
+                function buttonClick(newMessage, event){
+                    x.value = event.x;
+                    y.value = event.y;
                 }
 
-                function RandomLuckyNumber(){
-                    luckyNum.value = Math.floor(Math.random()*10) + 1;  
-                    return Math.floor(Math.random()*10)+1;
-                }
-
-                function capMessage(){
-                    return message.toUpperCase()
+                function pressEnter(){
+                    alert("Key pressed!");
                 }
 
                 return{
-                    message,
-                    luckyNum,
-                    luckyNumbers,
-                    employee,
-                    RandomLuckyNumber,
-                    capMessage
+                    buttonClick,
+                    x,
+                    y,
+                    pressEnter
+                                    
                 };
             },
         }).mount('#app');
