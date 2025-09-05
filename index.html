@@ -10,18 +10,32 @@
 
 <body class="h-full grid place-items-center">
     <div id="app">
-        <section>
-            <h2 class="font-bold mb-2">Assignments</h2>
+        <section v-show="inProgressAssignments.length">
+            <h2 class="font-bold mb-2">In Progress</h2>
             <ul>
-                <li v-for="assignment in assignments">
+                <li 
+                    v-for="assignment in inProgressAssignments"
+                     :key="assignment.name">
                     <label>
                         {{ assignment.name }}
                         <input type="checkbox" v-model="assignment.complete"/>
                     </label>
+                </li>
             </ul>
-            <pre>
-                {{ assignments }}
-            </pre>
+        </section>
+        <section v-show="completedAssignments.length" class="mt-8">
+            <h2 class="font-bold mb-2">Complete</h2>
+            <ul>
+                <li 
+                    v-for="assignment in completedAssignments"
+                    :key="assignment.name"
+                >
+                    <label>
+                        {{ assignment.name }}
+                        <input type="checkbox" v-model="assignment.complete"/>
+                    </label>
+                </li>
+            </ul>
         </section>
     </div>
     <script>
@@ -34,6 +48,14 @@
                         { name: 'Read chapter 4', complete: false },
                         { name: 'Turn in homework', complete: false },
                     ]
+                }
+            },
+            computed: { 
+                completedAssignments(){
+                    return this.assignments.filter(a => a.complete);
+                },
+                inProgressAssignments(){
+                    return this.assignments.filter(a => !a.complete);
                 }
             }
         };
