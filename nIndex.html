@@ -1,57 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     </head>
     <body>
         <div id="app">
-            <div>
-                <div>Learn Vue</div>
-                <p>{{ obj.count }}</p>
-                <p>{{getFullName}}</p>
-                <button v-on:click.="obj.count++">Increment</button>
-                <button v-on:click="obj.count--">Decrement</button>
-                <br/>
-                First Name: 
-                <input type="text" v-model="firstName"/>
-            </div>
+            Hello
         </div>
     </body>
     <script>
-        const { createApp, ref, reactive, computed, watch} = Vue;
+        const { createApp, ref, reactive, computed, watch } = Vue;
         createApp({
-            setup(){
-                let counter = ref(0);
-                const obj = reactive({count: 0});
-                let firstName = ref("Ben");
-                let lastName = ref("Patel");
-
-                watch(
-                    () => obj.count,
-                    (newValue, oldValue) => {
-                        console.log(
-                            "Counter value changed from ",
-                            oldValue,
-                            " to ",
-                            newValue
-                        );
-                        if(newValue == 5){
-                            alert("Counter value is 5");
-                        }
-                    }
-                )
-
-                const getFullName = computed((previous) => {
-                    console.log("previous value", previous);
-                    return firstName.value + " " + lastName.value
-                })
-
-                return{
-                    counter,
-                    getFullName,
-                    firstName,
-                    obj          
-                };
+            setup() {
+                return {};
             },
         }).mount('#app');
     </script>
