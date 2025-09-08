@@ -8,11 +8,14 @@ export default {
     },
 
     template: `
-    <section v-show="assignments.length">
+    <section v-show="assignments.length" class="w-60 bg-gray-700 p-4 border border-gray-600 rounded-lg">
+        <div class="flex justify-between item-start">  
         <h2 class="font-bold mb-2">
             {{ title }} 
             <span>({{ assignments.length }})</span>
         </h2>
+        <button v-show="canToggle" @click="$emit('toggle')">&times;</button>
+        </div>
 
         <assignment-tags
             v-model:currentTag="currentTag"
@@ -25,18 +28,21 @@ export default {
             :assignment="assignment"
            ></assignment>
         </ul>
-    </section>
+        <slot>
+            
+        </slot>
+        </section>
     `,
 
     props: {
         assignments: Array,
         title: String,
-
+        canToggle: {type: Boolean, default: false}
     },
 
     data() {
         return {
-            currentTag: 'all'
+            currentTag: 'all',
         }
     },
 
