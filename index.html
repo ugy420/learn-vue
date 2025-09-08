@@ -8,13 +8,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="h-full grid place-items-center bg-gray-800 text-white">
+<body class="h-full grid place-items-center bg-gray-800">
     <div id="app">
-        
+        <input type="text" :value="name" @input="name=$event.target.value">
     </div>
-    <script type="module">
-        import App from './js/App.js';
-        Vue.createApp(App).mount('#app');
+
+    <script>
+        Vue.createApp({
+            data(){
+                return{
+                    name: 'gege'
+                }
+            }
+        }).mount("#app");
     </script>
 </body>
 
